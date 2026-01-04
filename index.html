@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pendrive Resources + Login</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #f1f3f6;
+        }
+
+        #loginOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: .5s;
+        }
+
+        #loginOverlay.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #loginBox {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+        }
+
+        #loginBox input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        #loginBox button {
+            width: 50%;
+            padding: 10px;
+            background: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        #errorMessage {
+            color: red;
+        }
+
+        .navbar {
+            background: #2874F0;
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, .12);
+            position: relative;
+        }
+
+        .card img {
+            border-radius: 10px 10px 0 0;
+            height: 380px;
+            object-fit: contain;
+            width: 100%;
+        }
+
+        .heart {
+            position: absolute;
+            right: 12px;
+            top: 12px;
+            font-size: 22px;
+            color: #777;
+            cursor: pointer;
+        }
+
+        .heart.active {
+            color: red;
+        }
+
+        .bottomnav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            border-top: 1px solid #ddd;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            z-index: 10;
+        }
+
+        .bottomnav div {
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .active-tab {
+            color: #2874F0;
+            font-weight: 600;
+        }
+
+        .page {
+            display: none;
+            padding-bottom: 80px;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .list-group-item {
+            cursor: pointer;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+        }
+
+        .list-group-item:hover {
+            background: #e9f0ff;
+        }
+
+        #backBtn {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- LOGIN -->
+    <div id="loginOverlay">
+        <div id="loginBox">
+            <h2>Login to Pendrive</h2>
+            <p><strong>Jayesh_pendrive</strong></p>
+            <input type="password" id="password" placeholder="Enter Password">
+            <button onclick="checkLogin()">Login</button>
+            <div id="errorMessage"></div>
+        </div>
+    </div>
+
+    <!-- MAIN -->
+    <div id="mainContent" style="display:none;">
+
+        <nav class="navbar navbar-dark fixed-top">
+            <div class="container-fluid">
+                <span class="navbar-brand fw-bold">My Store</span>
+            </div>
+        </nav>
+
+        <div style="height:60px"></div>
+
+        <!-- SEARCH + BACK BUTTON -->
+        <div class="container mt-2 d-flex justify-content-between align-items-center">
+            <input id="searchInput" class="form-control me-2" type="text" placeholder="Search products..." style="flex:1;" onkeyup="searchProducts()">
+            <button class="btn btn-primary" id="backBtn" onclick="goBack()">← Go Back</button>
+        </div>
+
+        <!-- HOME -->
+        <div id="home" class="container page active mt-3">
+            <div id="productGrid" class="row g-3"></div>
+        </div>
+
+        <!-- CATEGORY -->
+        <div id="category" class="container page mt-3">
+            <!-- Featured Products Heading -->
+
+            <!-- Categories List -->
+            <h5>Categories</h5>
+            <ul class="list-group mb-3">
+                <li class="list-group-item" onclick="openPage('Mobile', null, 'mobilePage', 'mobileGrid')">Mobile</li>
+                <li class="list-group-item" onclick="openPage('Laptop', null, 'laptopPage', 'laptopGrid')">Laptop</li>
+                <li class="list-group-item" onclick="openPage('Watch', null, 'watchPage', 'watchGrid')">Watch</li>
+                <li class="list-group-item" onclick="openPage('2020', null, 'con2020Page', 'con2020Grid')">2020</li>
+            </ul>
+
+            <h5>Featured Products</h5>
+            <div id="categoryFeaturedGrid" class="row g-3 mb-4"></div>
+        </div>
+
+        <!-- SUB-PAGES -->
+        <div id="mobilePage" class="container page mt-3">
+            <h5>Mobile Phones</h5>
+            <ul class="list-group mb-3">
+                <li class="list-group-item" onclick="openPage('Mobile','Vivo','vivoPage','vivoGrid')">Vivo</li>
+                <li class="list-group-item" onclick="openPage('Mobile','Samsung','samsungPage','samsungGrid')">Samsung</li>
+            </ul>
+            <div id="mobileGrid" class="row g-3"></div>
+        </div>
+
+        <div id="vivoPage" class="container page mt-3">
+            <h5>Vivo Phones</h5>
+            <div id="vivoGrid" class="row g-3"></div>
+        </div>
+
+        <div id="samsungPage" class="container page mt-3">
+            <h5>Samsung Phones</h5>
+            <div id="samsungGrid" class="row g-3"></div>
+        </div>
+
+        <div id="laptopPage" class="container page mt-3">
+            <h5>Laptops</h5>
+            <ul class="list-group mb-3">
+                <li class="list-group-item" onclick="openPage('Laptop','Dell','dellPage','dellGrid')">Dell</li>
+                <li class="list-group-item" onclick="openPage('Laptop','HP','hpPage','hpGrid')">HP</li>
+            </ul>
+            <div id="laptopGrid" class="row g-3"></div>
+        </div>
+
+        <div id="dellPage" class="container page mt-3">
+            <h5>Dell Laptops</h5>
+            <div id="dellGrid" class="row g-3"></div>
+        </div>
+
+        <div id="hpPage" class="container page mt-3">
+            <h5>HP Laptops</h5>
+            <div id="hpGrid" class="row g-3"></div>
+        </div>
+
+        <div id="watchPage" class="container page mt-3">
+            <h5>Watches</h5>
+            <ul class="list-group mb-3">
+                <li class="list-group-item" onclick="openPage('Watch','Boat','boatPage','boatGrid')">Boat</li>
+                <li class="list-group-item" onclick="openPage('Watch','Noise','noisePage','noiseGrid')">Noise</li>
+            </ul>
+            <div id="watchGrid" class="row g-3"></div>
+        </div>
+
+        <div id="boatPage" class="container page mt-3">
+            <h5>Boat Watches</h5>
+            <div id="boatGrid" class="row g-3"></div>
+        </div>
+
+        <div id="noisePage" class="container page mt-3">
+            <h5>Noise Watches</h5>
+            <div id="noiseGrid" class="row g-3"></div>
+        </div>
+
+        <div id="con2020Page" class="container page mt-3">
+            <h5>2020</h5>
+            <ul class="list-group mb-3">
+                <li class="list-group-item" onclick="openPage('2020','Allover','alloverPage','alloverGrid')">Allover</li>
+            </ul>
+            <div id="con2020Grid" class="row g-3"></div>
+        </div>
+
+        <div id="alloverPage" class="container page mt-3">
+            <h5>Allover</h5>
+            <div id="alloverGrid" class="row g-3"></div>
+        </div>
+
+        <!-- ACCOUNT -->
+        <div id="account" class="container page mt-3">
+            <h5>My Account</h5>
+        </div>
+
+        <!-- WISHLIST -->
+        <div id="wishlist" class="container page mt-3">
+            <h5>My Wishlist</h5>
+            <div id="wishlistGrid" class="row g-3"></div>
+        </div>
+
+        <!-- BOTTOM NAV -->
+        <div class="bottomnav">
+            <div onclick="openTab('home',this)" class="active-tab"><i class="bi bi-house"></i><br>Home</div>
+            <div onclick="openTab('category',this)"><i class="bi bi-grid"></i><br>Category</div>
+            <div onclick="openTab('wishlist',this)"><i class="bi bi-heart"></i><br>Wishlist</div>
+            <div onclick="openTab('account',this)"><i class="bi bi-person-circle"></i><br>Account</div>
+        </div>
+
+        <!-- MODAL -->
+        <div class="modal fade" id="productModal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div>
+                            <h5 id="modalTitle"></h5>
+                            <p id="modalPath" class="text-muted small" style="margin-top:-5px;"></p>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div style="position:relative">
+                            <i id="modalHeart" class="bi bi-heart heart"></i>
+                            <img id="modalImg" class="img-fluid rounded mb-2">
+                        </div>
+                        <p id="modalDesc"></p>
+                        <p id="modalStitch" class="text-muted small"></p>
+                        <p id="modalColor" class="text-muted small"></p>
+                        <h5 id="modalPrice"></h5>
+                    </div>
+                    <div class="modal-footer">
+                        <a id="modalShare" class="btn btn-success" target="_blank"><i class="bi bi-whatsapp"></i> Share</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // LOGIN
+        function checkLogin() {
+            if (password.value === "1") {
+                loginOverlay.classList.add("hide");
+                loginOverlay.addEventListener("transitionend", () => {
+                    mainContent.style.display = "block";
+                    document.body.style.overflow = "auto";
+                    loadProducts();
+                }, {
+                    once: true
+                });
+            } else errorMessage.innerText = "Incorrect password!";
+        }
+        document.addEventListener("keydown", e => {
+            if (e.key === "Enter") checkLogin();
+        });
+
+        // PRODUCTS (INCLUDING EXTRA PRODUCT CATEGORY)
+        let products = []
+        
+        fetch("data/products.json")
+  .then(res => res.json())
+  .then(data => {
+    products = data;
+    loadProducts();   // existing function in your code
+  })
+  .catch(err => console.error(err));
+
+        let wishlist = [];
+        let activeProduct = null;
+        let historyStack = [];
+
+        // LOAD HOME PRODUCTS (Normal + Extra Product)
+        function loadProducts() {
+            productGrid.innerHTML = "";
+            products.forEach(p => productGrid.innerHTML += cardHTML(p));
+            syncHearts();
+        }
+
+        function cardHTML(p) {
+            let active = wishlist.includes(p.id) ? "active" : "";
+            return `
+<div class="col-6 col-md-4 col-lg-3">
+<div class="card" data-id="${p.id}">
+<i class="bi bi-heart heart ${active}" onclick="toggleWishlist(${p.id})"></i>
+<img onclick="showProduct(${p.id})" src="${p.img}">
+<div class="card-body">
+<h6>${p.name}</h6>
+<strong>₹${p.price}</strong>
+</div>
+</div>
+</div>`;
+        }
+
+        function openTab(id, el) {
+            let current = document.querySelector(".page.active")?.id;
+            if (current && current !== id) historyStack.push(current);
+
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+
+            document.querySelectorAll('.bottomnav div').forEach(b => b.classList.remove('active-tab'));
+            if (el) el.classList.add('active-tab');
+
+            if (id === "wishlist") renderWishlist();
+            if (id === "category") renderFeaturedCategoryProducts();
+
+            updateBackButton();
+        }
+
+        // FEATURED PRODUCTS FROM REAL CATEGORY
+        function renderFeaturedCategoryProducts() {
+            let grid = document.getElementById('categoryFeaturedGrid');
+            grid.innerHTML = "";
+            products
+                .filter(p => p.category === "Extra Product")
+                .forEach(p => grid.innerHTML += cardHTML(p));
+        }
+
+        function getProductPath(p) {
+            return p.category + (p.subCategory ? " > " + p.subCategory : "");
+        }
+
+        function showProduct(id) {
+            activeProduct = products.find(p => p.id === id);
+            modalTitle.innerText = activeProduct.name;
+            modalPath.innerText = getProductPath(activeProduct);
+            modalStitch.innerHTML = activeProduct.stitch ? "<strong>Stitch :</strong> " + activeProduct.stitch : "";
+            modalColor.innerHTML = activeProduct.color ? "<strong>Color :</strong> " + activeProduct.color : "";
+            modalImg.src = activeProduct.img;
+            modalDesc.innerText = activeProduct.desc;
+            modalPrice.innerText = "₹" + activeProduct.price;
+            modalHeart.classList.toggle("active", wishlist.includes(activeProduct.id));
+            modalHeart.onclick = () => toggleWishlist(activeProduct.id);
+            new bootstrap.Modal(productModal).show();
+        }
+
+        function toggleWishlist(id) {
+            wishlist.includes(id) ? wishlist = wishlist.filter(x => x !== id) : wishlist.push(id);
+            syncHearts();
+            renderWishlist();
+        }
+
+        function syncHearts() {
+            document.querySelectorAll(".card").forEach(c => {
+                let h = c.querySelector(".heart");
+                let id = parseInt(c.dataset.id);
+                h.classList.toggle("active", wishlist.includes(id));
+            });
+            if (activeProduct) modalHeart.classList.toggle("active", wishlist.includes(activeProduct.id));
+        }
+
+        function renderWishlist() {
+            wishlistGrid.innerHTML = "";
+            wishlist.forEach(id => {
+                let p = products.find(x => x.id === id);
+                wishlistGrid.innerHTML += cardHTML(p);
+            });
+        }
+
+        function openPage(category, subCategory, pageId, gridId) {
+            openTab(pageId);
+            let grid = document.getElementById(gridId);
+            grid.innerHTML = "";
+
+            if (subCategory) {
+                products.filter(p => p.category === category && p.subCategory === subCategory)
+                    .forEach(p => grid.innerHTML += cardHTML(p));
+            } else {
+                products.filter(p => p.category === category && (!p.subCategory || p.subCategory === ""))
+                    .forEach(p => grid.innerHTML += cardHTML(p));
+            }
+
+            syncHearts();
+        }
+
+        function searchProducts() {
+            let query = searchInput.value.toLowerCase();
+            document.querySelectorAll(".page.active .card").forEach(card => {
+                let name = card.querySelector("h6").innerText.toLowerCase();
+                card.style.display = name.includes(query) ? "" : "none";
+            });
+        }
+
+        function updateBackButton() {
+            let currentPage = document.querySelector(".page.active")?.id;
+            backBtn.style.display = currentPage !== "home" ? "inline-block" : "none";
+        }
+
+        function goBack() {
+            if (historyStack.length === 0) {
+                openTab('home');
+                return;
+            }
+            let lastPage = historyStack.pop();
+            if (lastPage === 'category') historyStack = [];
+            openTab(lastPage);
+        }
+    </script>
+
+</body>
+
+</html>
