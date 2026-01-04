@@ -1,1 +1,35 @@
-[]
+[
+  {
+    "id": 1,
+    "name": "Samsung Galaxy A15",
+    "price": 15999,
+    "img": "https://via.placeholder.com/400",
+    "desc": "Latest budget smartphone",
+    "stitch": "Free Delivery Available",
+    "color": "Red",
+    "category": "Mobile",
+    "subCategory": ""
+  },
+  {
+    "id": 2,
+    "name": "Samsung Galaxy A15",
+    "price": 15999,
+    "img": "https://via.placeholder.com/400",
+    "desc": "Latest budget smartphone",
+    "stitch": "Free Delivery Available",
+    "color": "Red",
+    "category": "Mobile",
+    "subCategory": "Vivo"
+  },
+  {
+    "id": 3,
+    "name": "Samsung Galaxy A15",
+    "price": 15999,
+    "img": "https://via.placeholder.com/400",
+    "desc": "Latest budget smartphone",
+    "stitch": "Free Delivery Available",
+    "color": "Red",
+    "category": "Mobile",
+    "subCategory": "Samsung"
+  }
+]
