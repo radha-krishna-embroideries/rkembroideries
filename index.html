@@ -142,6 +142,43 @@
             background: #e9f0ff;
         }
 
+        .thumb-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: 0.2s;
+            opacity: 0.4;
+            filter: grayscale(50%);
+        }
+
+        .thumb-img.active {
+            opacity: 1;
+            filter: none;
+            pointer-events: none;
+        }
+
+        .count-badge {
+            transition: transform 0.25s ease, opacity 0.25s ease;
+            transform: scale(0.6);
+            opacity: 0;
+        }
+
+        .count-badge.show {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        #modalImg {
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        #modalImg.fade {
+            opacity: 0;
+            transform: scale(0.97);
+        }
+
         #backBtn {
             display: none;
         }
@@ -183,93 +220,442 @@
             <div id="productGrid" class="row g-3"></div>
         </div>
 
-        <!-- CATEGORY -->
-        <div id="category" class="container page mt-3">
-            <!-- Featured Products Heading -->
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
 
-            <!-- Categories List -->
+        <!-- CATEGORY -->
+
+        <div id="category" class="container page mt-3">
             <h5>Categories</h5>
             <ul class="list-group mb-3">
-                <li class="list-group-item" onclick="openPage('Mobile', null, 'mobilePage', 'mobileGrid')">Mobile</li>
-                <li class="list-group-item" onclick="openPage('Laptop', null, 'laptopPage', 'laptopGrid')">Laptop</li>
-                <li class="list-group-item" onclick="openPage('Watch', null, 'watchPage', 'watchGrid')">Watch</li>
-                <li class="list-group-item" onclick="openPage('2020', null, 'con2020Page', 'con2020Grid')">2020</li>
+                <li class="list-group-item" onclick="openPage('2020',null,'con2020Page','con2020Grid')">2020<span class="badge bg-primary float-end count-badge" id="count-2020"></span>
+                </li>
+                <li class="list-group-item" onclick="openPage('2021',null,'con2021Page','con2021Grid')">2021<span class="badge bg-primary float-end count-badge" id="count-2021"></span></li>
+                <li class="list-group-item" onclick="openPage('2022',null,'con2022Page','con2022Grid')">2022<span class="badge bg-primary float-end count-badge" id="count-2022"></span></li>
+                <li class="list-group-item" onclick="openPage('2023',null,'con2023Page','con2023Grid')">2023<span class="badge bg-primary float-end count-badge" id="count-2023"></span></li>
+                <li class="list-group-item" onclick="openPage('Bhaveshbhai',null,'bhaveshbhaiPage','bhaveshbhaiGrid')">Bhaveshbhai<span class="badge bg-primary float-end count-badge" id="count-Bhaveshbhai"></span></li>
+                <li class="list-group-item" onclick="openPage('Dhiraj',null,'dhirajPage','dhirajGrid')">Dhiraj<span class="badge bg-primary float-end count-badge" id="count-Dhiraj"></span></li>
+                <li class="list-group-item" onclick="openPage('Emb',null,'embPage','embGrid')">Emb<span class="badge bg-primary float-end count-badge" id="count-Emb"></span></li>
+                <li class="list-group-item" onclick="openPage('Gaurang',null,'gaurangPage','gaurangGrid')">Gaurang<span class="badge bg-primary float-end count-badge" id="count-Gaurang"></span></li>
+                <li class="list-group-item" onclick="openPage('Ghero',null,'gheroPage','gheroGrid')">Ghero<span class="badge bg-primary float-end count-badge" id="count-Ghero"></span></li>
+                <li class="list-group-item" onclick="openPage('Gopal',null,'gopalPage','gopalGrid')">Gopal<span class="badge bg-primary float-end count-badge" id="count-Gopal"></span></li>
+                <li class="list-group-item" onclick="openPage('Jay Mataji',null,'jaymatajiPage','jaymatajiGrid')">Jay Mataji<span class="badge bg-primary float-end count-badge" id="count-Jay Mataji"></span></li>
+                <li class="list-group-item" onclick="openPage('Jay-2',null,'jay2Page','jay2Grid')">Jay-2<span class="badge bg-primary float-end count-badge" id="count-Jay-2"></span></li>
+                <li class="list-group-item" onclick="openPage('Jaydev',null,'jaydevPage','jaydevGrid')">Jaydev<span class="badge bg-primary float-end count-badge" id="count-Jaydev"></span></li>
+                <li class="list-group-item" onclick="openPage('Jayesh',null,'jayeshPage','jayeshGrid')">Jayesh<span class="badge bg-primary float-end count-badge" id="count-Jayesh"></span></li>
+                <li class="list-group-item" onclick="openPage('Lost',null,'lostPage','lostGrid')">Lost<span class="badge bg-primary float-end count-badge" id="count-Lost"></span></li>
+                <li class="list-group-item" onclick="openPage('Mehul',null,'mehulPage','mehulGrid')">Mehul<span class="badge bg-primary float-end count-badge" id="count-Mehul"></span></li>
+                <li class="list-group-item" onclick="openPage('Pd',null,'pdPage','pdGrid')">Pd<span class="badge bg-primary float-end count-badge" id="count-Pd"></span></li>
+                <li class="list-group-item" onclick="openPage('Plazo',null,'plazoPage','plazoGrid')">Plazo<span class="badge bg-primary float-end count-badge" id="count-Plazo"></span></li>
+                <li class="list-group-item" onclick="openPage('Pn',null,'pnPage','pnGrid')">Pn<span class="badge bg-primary float-end count-badge" id="count-Pn"></span></li>
+                <li class="list-group-item" onclick="openPage('Print',null,'printPage','printGrid')">Print<span class="badge bg-primary float-end count-badge" id="count-Print"></span></li>
+                <li class="list-group-item" onclick="openPage('Sample',null,'samplePage','sampleGrid')">Sample<span class="badge bg-primary float-end count-badge" id="count-Sample"></span></li>
+                <li class="list-group-item" onclick="openPage('Sequin',null,'sequinPage','sequinGrid')">Sequin<span class="badge bg-primary float-end count-badge" id="count-Sequin"></span></li>
+                <li class="list-group-item" onclick="openPage('Sliwe Work',null,'sliweworkPage','sliweworkGrid')">Sliwe Work<span class="badge bg-primary float-end count-badge" id="count-Sliwe Work"></span></li>
+                <li class="list-group-item" onclick="openPage('Telegram',null,'telegramPage','telegramGrid')">Telegram<span class="badge bg-primary float-end count-badge" id="count-Telegram"></span></li>
+
+                <!-- Add step - 1 ☝☝☝☝☝ ( CATEGORY ) ====================================================== -->
+
             </ul>
+
+            <!-- ================================================================================================= -->
+            <!-- ================================================================================================= -->
+            <!-- ================================================================================================= -->
 
             <h5>Featured Products</h5>
             <div id="categoryFeaturedGrid" class="row g-3 mb-4"></div>
         </div>
 
-        <!-- SUB-PAGES -->
-        <div id="mobilePage" class="container page mt-3">
-            <h5>Mobile Phones</h5>
-            <ul class="list-group mb-3">
-                <li class="list-group-item" onclick="openPage('Mobile','Vivo','vivoPage','vivoGrid')">Vivo</li>
-                <li class="list-group-item" onclick="openPage('Mobile','Samsung','samsungPage','samsungGrid')">Samsung</li>
-            </ul>
-            <div id="mobileGrid" class="row g-3"></div>
-        </div>
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
 
-        <div id="vivoPage" class="container page mt-3">
-            <h5>Vivo Phones</h5>
-            <div id="vivoGrid" class="row g-3"></div>
-        </div>
+        <!-- CATEGORY PAGES + SUBCATEGORY + SUBCATEGORY PAGES + SUBSUBCATEGORY + SUBSUBCATEGORY PAGES -->
 
-        <div id="samsungPage" class="container page mt-3">
-            <h5>Samsung Phones</h5>
-            <div id="samsungGrid" class="row g-3"></div>
-        </div>
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
 
-        <div id="laptopPage" class="container page mt-3">
-            <h5>Laptops</h5>
-            <ul class="list-group mb-3">
-                <li class="list-group-item" onclick="openPage('Laptop','Dell','dellPage','dellGrid')">Dell</li>
-                <li class="list-group-item" onclick="openPage('Laptop','HP','hpPage','hpGrid')">HP</li>
-            </ul>
-            <div id="laptopGrid" class="row g-3"></div>
-        </div>
-
-        <div id="dellPage" class="container page mt-3">
-            <h5>Dell Laptops</h5>
-            <div id="dellGrid" class="row g-3"></div>
-        </div>
-
-        <div id="hpPage" class="container page mt-3">
-            <h5>HP Laptops</h5>
-            <div id="hpGrid" class="row g-3"></div>
-        </div>
-
-        <div id="watchPage" class="container page mt-3">
-            <h5>Watches</h5>
-            <ul class="list-group mb-3">
-                <li class="list-group-item" onclick="openPage('Watch','Boat','boatPage','boatGrid')">Boat</li>
-                <li class="list-group-item" onclick="openPage('Watch','Noise','noisePage','noiseGrid')">Noise</li>
-            </ul>
-            <div id="watchGrid" class="row g-3"></div>
-        </div>
-
-        <div id="boatPage" class="container page mt-3">
-            <h5>Boat Watches</h5>
-            <div id="boatGrid" class="row g-3"></div>
-        </div>
-
-        <div id="noisePage" class="container page mt-3">
-            <h5>Noise Watches</h5>
-            <div id="noiseGrid" class="row g-3"></div>
-        </div>
-
+        <!-- CATEGORY 2020 PAGE / SUBCATEGORY  -->
         <div id="con2020Page" class="container page mt-3">
             <h5>2020</h5>
             <ul class="list-group mb-3">
-                <li class="list-group-item" onclick="openPage('2020','Allover','alloverPage','alloverGrid')">Allover</li>
+                <li class="list-group-item" onclick="openPage('2020','Allover','alloverPage','alloverGrid')">Allover<span class="badge bg-secondary float-end" id="count-2020-Allover"></span></li>
             </ul>
             <div id="con2020Grid" class="row g-3"></div>
         </div>
 
+        <!-- SUBCATEGORY PAGE + SUBSUBCATEGORY -->
         <div id="alloverPage" class="container page mt-3">
             <h5>Allover</h5>
             <div id="alloverGrid" class="row g-3"></div>
         </div>
+
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+
+        <!-- CATEGORY 2021 PAGE / SUBCATEGORY  -->
+        <div id="con2021Page" class="container page mt-3">
+            <h5>2021</h5>
+            <ul class="list-group mb-3">
+                <li class="list-group-item" onclick="openPage('2021','Koti','kotiPage','kotiGrid')">Koti<span class="badge bg-secondary float-end" id="count-2021-Koti"></span></li>
+                <li class="list-group-item" onclick="openPage('2021','Panal','panalPage','panalGrid')">Panal<span class="badge bg-secondary float-end" id="count-2021-Panal"></span></li>
+            </ul>
+            <div id="con2021Grid" class="row g-3"></div>
+        </div>
+
+        <!-- SUBCATEGORY PAGE -->
+        <div id="kotiPage" class="container page mt-3">
+            <h5>Koti</h5>
+            <div id="kotiGrid" class="row g-3"></div>
+        </div>
+
+        <div id="panalPage" class="container page mt-3">
+            <h5>Panal</h5>
+            <div id="panalGrid" class="row g-3"></div>
+        </div>
+
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+
+        <!-- CATEGORY 2022 PAGE / SUBCATEGORY  -->
+        <div id="con2022Page" class="container page mt-3">
+            <h5>2022</h5>
+            <div id="con2022Grid" class="row g-3"></div>
+        </div>
+
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+
+        <!-- CATEGORY 2023 PAGE / SUBCATEGORY  -->
+        <div id="con2023Page" class="container page mt-3">
+            <h5>2023</h5>
+            <ul class="list-group mb-3">
+                <li class="list-group-item" onclick="openPage('2023','Hitesh Simran','hiteshsimranPage','hiteshsimranGrid')">Hitesh Simran<span class="badge bg-secondary float-end" id="count-2023-Hitesh Simran"></span></li>
+            </ul>
+            <div id="con2023Grid" class="row g-3"></div>
+        </div>
+
+        <!-- SUBCATEGORY PAGE -->
+        <div id="hiteshsimranPage" class="container page mt-3">
+            <h5>Hitesh Simran</h5>
+            <div id="hiteshsimranGrid" class="row g-3"></div>
+        </div>
+
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+
+        <!-- CATEGORY BHAVESHBHAI PAGE / SUBCATEGORY  -->
+        <div id="bhaveshbhaiPage" class="container page mt-3">
+            <h5>Bhaveshbhai</h5>
+            <ul class="list-group mb-3">
+                <li class="list-group-item" onclick="openPage('Bhaveshbhai','Bhavin','bhavinPage','bhavinGrid')">Bhavin<span class="badge bg-secondary float-end" id="count-Bhaveshbhai-Bhavin"></span></li>
+            </ul>
+            <div id="bhaveshbhaiGrid" class="row g-3"></div>
+        </div>
+
+        <!-- SUBCATEGORY PAGE -->
+        <div id="bhavinPage" class="container page mt-3">
+            <h5>Bhavin</h5>
+            <div id="bhavinGrid" class="row g-3"></div>
+        </div>
+
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+
+        <!-- CATEGORY DHIRAJ PAGE / SUBCATEGORY  -->
+        <div id="dhirajPage" class="container page mt-3">
+            <h5>Dhiraj</h5>
+            <div id="dhirajGrid" class="row g-3"></div>
+        </div>
+
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+
+        <!-- CATEGORY EMB PAGE -->
+        <div id="embPage" class="container page mt-3">
+            <h5>Emb</h5>
+            <div id="embGrid" class="row g-3"></div>
+        </div>
+
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+
+        <!-- CATEGORY GAURANG PAGE  -->
+        <div id="gaurangPage" class="container page mt-3">
+            <h5>Gaurang</h5>
+            <div id="gaurangGrid" class="row g-3"></div>
+        </div>
+
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+
+        <!-- CATEGORY GHERO PAGE -->
+        <div id="gheroPage" class="container page mt-3">
+            <h5>Ghero</h5>
+            <div id="gheroGrid" class="row g-3"></div>
+        </div>
+
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+
+        <!-- CATEGORY GOPAL PAGE / SUBCATEGORY ALLOVER  -->
+        <div id="gopalPage" class="container page mt-3">
+            <h5>Gopal</h5>
+            <ul class="list-group mb-3">
+                <li class="list-group-item" onclick="openPage('Gopal','Allover','allover11Page','allover11Grid')">Allover<span class="badge bg-secondary float-end" id="count-Gopal-Allover"></span></li>
+            </ul>
+            <div id="gopalGrid" class="row g-3"></div>
+        </div>
+
+        <!-- SUBCATEGORY ALLOVER PAGE -->
+        <div id="allover11Page" class="container page mt-3">
+            <h5>Allover</h5>
+            <div id="allover11Grid" class="row g-3"></div>
+        </div>
+
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+
+        <!-- CATEGORY JAY MATAJI PAGE -->
+        <div id="jaymatajiPage" class="container page mt-3">
+            <h5>Jay Mataji</h5>
+            <div id="jaymatajiGrid" class="row g-3"></div>
+        </div>
+
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+
+        <!-- CATEGORY JAY-2 PAGE -->
+        <div id="jay2Page" class="container page mt-3">
+            <h5>Jay-2</h5>
+            <div id="jay2Grid" class="row g-3"></div>
+        </div>
+
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+
+        <!-- CATEGORY JAYDEV PAGE -->
+        <div id="jaydevPage" class="container page mt-3">
+            <h5>Jay Dev</h5>
+            <div id="jaydevGrid" class="row g-3"></div>
+        </div>
+
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+
+        <!-- CATEGORY JAYESH PAGE / SUBCATEGORY - 2019 + BHARATBHAI + DAMAN + DIVIDER + MEHUL + NARESH + TELEGRAM-1  -->
+        <div id="jayeshPage" class="container page mt-3">
+            <h5>Jayesh</h5>
+            <ul class="list-group mb-3">
+                <li class="list-group-item" onclick="openPage('Jayesh','2019','con2019Page','con2019Grid')">2019<span class="badge bg-secondary float-end" id="count-Jayesh-2019"></span></li>
+                <li class="list-group-item" onclick="openPage('Jayesh','Bharatbhai','bharatbhaiPage','bharatbhaiGrid')">Bharatbhai<span class="badge bg-secondary float-end" id="count-Jayesh-Bharatbhai"></span></li>
+                <li class="list-group-item" onclick="openPage('Jayesh','Daman','damanPage','damanGrid')">Daman<span class="badge bg-secondary float-end" id="count-Jayesh-Daman"></span></li>
+                <li class="list-group-item" onclick="openPage('Jayesh','Divider','dividerPage','dividerGrid')">Divider<span class="badge bg-secondary float-end" id="count-Jayesh-Divider"></span></li>
+                <li class="list-group-item" onclick="openPage('Jayesh','Mehul','mehul11Page','mehul11Grid')">Mehul<span class="badge bg-secondary float-end" id="count-Jayesh-Mehul"></span></li>
+                <li class="list-group-item" onclick="openPage('Jayesh','Naresh','nareshPage','nareshGrid')">Naresh<span class="badge bg-secondary float-end" id="count-Jayesh-Naresh"></span></li>
+                <li class="list-group-item" onclick="openPage('Jayesh','Telegram','telegram11Page','telegram11Grid')">Telegram<span class="badge bg-secondary float-end" id="count-Jayesh-Telegram"></span></li>
+            </ul>
+            <div id="jayeshGrid" class="row g-3"></div>
+        </div>
+
+        <!-- SUBCATEGORY 2019 + BHARATBHAI + DAMAN + DIVIDER + MEHUL + NARESH + TELEGRAM-1 PAGE / SUBSUBCATEGORY_2019 - ALL + DAMAN-1 + DIVIDER-1 -->
+        <div id="con2019Page" class="container page mt-3">
+            <h5>2019</h5>
+            <ul class="list-group mb-3">
+                <li class="list-group-item" onclick="openSubSubPage('Jayesh','2019','All','allPage','allGrid')">All<span class="badge bg-secondary float-end" id="count-Jayesh-2019-All"></span></li>
+                <li class="list-group-item" onclick="openSubSubPage('Jayesh','2019','Daman','daman111Page','daman111Grid')">Daman<span class="badge bg-secondary float-end" id="count-Jayesh-2019-Daman"></span></li>
+                <li class="list-group-item" onclick="openSubSubPage('Jayesh','2019','Divider','divider111Page','divider111Grid')">Divider<span class="badge bg-secondary float-end" id="count-Jayesh-2019-Divider"></span></li>
+            </ul>
+            <div id="con2019Grid" class="row g-3"></div>
+        </div>
+
+        <div id="bharatbhaiPage" class="container page mt-3">
+            <h5>Bharatbhai</h5>
+            <div id="bharatbhaiGrid" class="row g-3"></div>
+        </div>
+
+        <div id="damanPage" class="container page mt-3">
+            <h5>Daman</h5>
+            <div id="damanGrid" class="row g-3"></div>
+        </div>
+
+        <div id="dividerPage" class="container page mt-3">
+            <h5>Divider</h5>
+            <div id="dividerGrid" class="row g-3"></div>
+        </div>
+
+        <div id="mehul11Page" class="container page mt-3">
+            <h5>Mehul</h5>
+            <div id="mehul11Grid" class="row g-3"></div>
+        </div>
+
+        <div id="nareshPage" class="container page mt-3">
+            <h5>Naresh</h5>
+            <div id="nareshGrid" class="row g-3"></div>
+        </div>
+
+        <div id="telegram11Page" class="container page mt-3">
+            <h5>Telegram</h5>
+            <div id="telegram11Grid" class="row g-3"></div>
+        </div>
+
+        <!-- SUBSUBCATEGORY ALL + DAMAN-1 + DIVIDER-1 PAGE -->
+        <div id="allPage" class="container page mt-3">
+            <h5>All</h5>
+            <div id="allGrid" class="row g-3"></div>
+        </div>
+
+        <div id="daman111Page" class="container page mt-3">
+            <h5>Daman</h5>
+            <div id="daman111Grid" class="row g-3"></div>
+        </div>
+
+        <div id="divider111Page" class="container page mt-3">
+            <h5>Divider</h5>
+            <div id="divider111Grid" class="row g-3"></div>
+        </div>
+
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+
+        <!-- CATEGORY LOST PAGE -->
+        <div id="lostPage" class="container page mt-3">
+            <h5>Lost</h5>
+            <div id="lostGrid" class="row g-3"></div>
+        </div>
+
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+
+        <!-- CATEGORY MEHUL PAGE / SUBCATEGORY - TY + YOG  -->
+        <div id="mehulPage" class="container page mt-3">
+            <h5>Mehul</h5>
+            <ul class="list-group mb-3">
+                <li class="list-group-item" onclick="openPage('Mehul','Ty','tyPage','tyGrid')">Ty<span class="badge bg-secondary float-end" id="count-Mehul-Ty"></span></li>
+                <li class="list-group-item" onclick="openPage('Mehul','Yog','yogPage','yogGrid')">Yog<span class="badge bg-secondary float-end" id="count-Mehul-Yog"></span></li>
+            </ul>
+            <div id="mehulGrid" class="row g-3"></div>
+        </div>
+
+        <!-- SUBCATEGORY TY + YOG PAGE -->
+        <div id="tyPage" class="container page mt-3">
+            <h5>Ty</h5>
+            <div id="tyGrid" class="row g-3"></div>
+        </div>
+
+        <div id="yogPage" class="container page mt-3">
+            <h5>Yog</h5>
+            <div id="yogGrid" class="row g-3"></div>
+        </div>
+
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+
+        <!-- CATEGORY PD PAGE -->
+        <div id="pdPage" class="container page mt-3">
+            <h5>Pd</h5>
+            <div id="pdGrid" class="row g-3"></div>
+        </div>
+
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+
+        <!-- CATEGORY PLAZO PAGE -->
+        <div id="plazoPage" class="container page mt-3">
+            <h5>Plazo</h5>
+            <div id="plazoGrid" class="row g-3"></div>
+        </div>
+
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+
+        <!-- CATEGORY PN PAGE -->
+        <div id="pnPage" class="container page mt-3">
+            <h5>Pn</h5>
+            <div id="pnGrid" class="row g-3"></div>
+        </div>
+
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+
+        <!-- CATEGORY PRINT PAGE -->
+        <div id="printPage" class="container page mt-3">
+            <h5>Print</h5>
+            <div id="printGrid" class="row g-3"></div>
+        </div>
+
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+
+        <!-- CATEGORY SAMPLE PAGE -->
+        <div id="samplePage" class="container page mt-3">
+            <h5>Sample</h5>
+            <div id="sampleGrid" class="row g-3"></div>
+        </div>
+
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+
+        <!-- CATEGORY SEQUIN PAGE / SUBCATEGORY - GOPAL-1 + JAYDEVBHAI + MAHALAXMI DESAINE LALITBHAI   -->
+        <div id="sequinPage" class="container page mt-3">
+            <h5>Sequin</h5>
+            <ul class="list-group mb-3">
+                <li class="list-group-item" onclick="openPage('Sequin','Gopal','gopal11Page','gopal11Grid')">Gopal<span class="badge bg-secondary float-end" id="count-Sequin-Gopal"></span></li>
+                <li class="list-group-item" onclick="openPage('Sequin','Jaydevbhai','jaydevbhaiPage','jaydevbhaiGrid')">Jaydevbhai<span class="badge bg-secondary float-end" id="count-Sequin-Jaydevbhai"></span></li>
+                <li class="list-group-item" onclick="openPage('Sequin','Mahalaxmi','mahalaxmiPage','mahalaxmiGrid')">Mahalaxmi Desaine Lalitbhai<span class="badge bg-secondary float-end" id="count-Sequin-Mahalaxmi"></span></li>
+                <li class="list-group-item" onclick="openPage('Sequin','Sb','sbPage','sbGrid')">Sb<span class="badge bg-secondary float-end" id="count-Sequin-Sb"></span></li>
+            </ul>
+            <div id="sequinGrid" class="row g-3"></div>
+        </div>
+
+        <!-- SUBCATEGORY GOPAL-1 + JAYDEVBHAI + MAHALAXMI DESAINE LALITBHAI PAGE -->
+        <div id="gopal11Page" class="container page mt-3">
+            <h5>Gopal</h5>
+            <div id="gopal11Grid" class="row g-3"></div>
+        </div>
+
+        <div id="jaydevbhaiPage" class="container page mt-3">
+            <h5>Jaydevbhai</h5>
+            <div id="jaydevbhaiGrid" class="row g-3"></div>
+        </div>
+
+        <div id="mahalaxmiPage" class="container page mt-3">
+            <h5>Mahalaxmi Desaine Lalitbhai</h5>
+            <div id="mahalaxmiGrid" class="row g-3"></div>
+        </div>
+
+        <div id="sbPage" class="container page mt-3">
+            <h5>Sb</h5>
+            <div id="sbGrid" class="row g-3"></div>
+        </div>
+
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+
+        <!-- CATEGORY Sliwe Work PAGE -->
+        <div id="sliweworkPage" class="container page mt-3">
+            <h5>Sliwe Work</h5>
+            <div id="sliweworkGrid" class="row g-3"></div>
+        </div>
+
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+
+        <!-- CATEGORY Telegram PAGE -->
+        <div id="telegramPage" class="container page mt-3">
+            <h5>Telegram</h5>
+            <div id="telegramGrid" class="row g-3"></div>
+        </div>
+
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+
+        <!-- ADD STEP - 2 HERE ☝☝☝☝☝ ( CATEGORY / SUBCATEGORY / SUBSUBCATEGORY + THEIR PAGES )=============-->
+
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
+        <!-- ===================================================================================================== -->
 
         <!-- ACCOUNT -->
         <div id="account" class="container page mt-3">
@@ -300,16 +686,27 @@
                             <p id="modalPath" class="text-muted small" style="margin-top:-5px;"></p>
                         </div>
                     </div>
+
                     <div class="modal-body">
-                        <div style="position:relative">
-                            <i id="modalHeart" class="bi bi-heart heart"></i>
-                            <img id="modalImg" class="img-fluid rounded mb-2">
+                        <div class="row g-3">
+                            <div class="col-md-6 text-center">
+                                <div style="position:relative; display:inline-block;">
+                                    <img id="modalImg" class="img-fluid rounded mb-2">
+                                    <i id="modalHeart" class="bi bi-heart heart" style="top:10px; right:10px;"></i>
+                                </div>
+                                <div id="modalExtraImages" class="d-flex gap-2 mt-2 flex-wrap justify-content-center">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <p id="modalDesc"></p>
+                                <p id="modalStitch" class="text-muted small"></p>
+                                <p id="modalColor" class="text-muted small"></p>
+                                <h4 id="modalPrice" class="mt-2"></h4>
+                            </div>
                         </div>
-                        <p id="modalDesc"></p>
-                        <p id="modalStitch" class="text-muted small"></p>
-                        <p id="modalColor" class="text-muted small"></p>
-                        <h5 id="modalPrice"></h5>
                     </div>
+
                     <div class="modal-footer">
                         <a id="modalShare" class="btn btn-success" target="_blank"><i class="bi bi-whatsapp"></i> Share</a>
                     </div>
@@ -320,9 +717,8 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
     <script>
-        // LOGIN
+        /* LOGIN SYSTEM */
         function checkLogin() {
             if (password.value === "1") {
                 loginOverlay.classList.add("hide");
@@ -330,6 +726,7 @@
                     mainContent.style.display = "block";
                     document.body.style.overflow = "auto";
                     loadProducts();
+                    updateProductCounts();
                 }, {
                     once: true
                 });
@@ -339,26 +736,256 @@
             if (e.key === "Enter") checkLogin();
         });
 
-        // PRODUCTS (INCLUDING EXTRA PRODUCT CATEGORY)
-        let products = []
-        
-        fetch("data/products.json")
-  .then(res => res.json())
-  .then(data => {
-    products = data;
-    loadProducts();   // existing function in your code
-  })
-  .catch(err => console.error(err));
+        /* PRODUCT ARRAY */
+        let products = [{
+                id: 1,
+                name: "2020",
+                price: "#",
+                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                desc: "#",
+                stitch: "#",
+                color: "#",
+                category: "2020",
+                subcategory: null,
+                subsubcategory: null
+            },
+            {
+                id: 2,
+                name: "2020 / Allover",
+                price: "#",
+                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                desc: "#",
+                stitch: "#",
+                color: "#",
+                category: "2020",
+                subcategory: "Allover",
+                subsubcategory: null
+            },
+            {
+                id: 3,
+                name: "2021",
+                price: "#",
+                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                desc: "#",
+                stitch: "#",
+                color: "#",
+                category: "2021",
+                subcategory: null,
+                subsubcategory: null
+            },
+            {
+                id: 4,
+                name: "2021 / Koti",
+                price: "#",
+                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                desc: "#",
+                stitch: "#",
+                color: "#",
+                category: "2021",
+                subcategory: "Koti",
+                subsubcategory: null
+            },
+            {
+                id: 5,
+                name: "2021 / Panal",
+                price: "#",
+                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                desc: "#",
+                stitch: "#",
+                color: "#",
+                category: "2021",
+                subcategory: "Panal",
+                subsubcategory: null
+            },
+            {
+                id: 6,
+                name: "2022",
+                price: "#",
+                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                desc: "#",
+                stitch: "#",
+                color: "#",
+                category: "2022",
+                subcategory: null,
+                subsubcategory: null
+            },
+            {
+                id: 7,
+                name: "2023",
+                price: "#",
+                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                desc: "#",
+                stitch: "#",
+                color: "#",
+                category: "2023",
+                subcategory: null,
+                subsubcategory: null
+            },
+            {
+                id: 8,
+                name: "2023 / Hitesh Simran",
+                price: "#",
+                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                desc: "#",
+                stitch: "#",
+                color: "#",
+                category: "2023",
+                subcategory: "Hitesh Simran",
+                subsubcategory: null
+            },
+            {
+                id: 9,
+                name: "Bhaveshbhai",
+                price: "#",
+                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                desc: "#",
+                stitch: "#",
+                color: "#",
+                category: "Bhaveshbhai",
+                subcategory: null,
+                subsubcategory: null
+            },
+            {
+                id: 10,
+                name: "Bhaveshbhai / Bhavin",
+                price: "#",
+                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                desc: "#",
+                stitch: "#",
+                color: "#",
+                category: "Bhaveshbhai",
+                subcategory: "Bhavin",
+                subsubcategory: null
+            },
+            {
+                id: 11,
+                name: "Dhiraj",
+                price: "#",
+                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                desc: "#",
+                stitch: "#",
+                color: "#",
+                category: "Dhiraj",
+                subcategory: null,
+                subsubcategory: null
+            },
+            {
+                id: 12,
+                name: "Emb",
+                price: "#",
+                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                desc: "#",
+                stitch: "#",
+                color: "#",
+                category: "Emb",
+                subcategory: null,
+                subsubcategory: null
+            },
+            {
+                id: 13,
+                name: "Gaurang",
+                price: "#",
+                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                desc: "#",
+                stitch: "#",
+                color: "#",
+                category: "Gaurang",
+                subcategory: null,
+                subsubcategory: null
+            },
+            {
+                id: 14,
+                name: "Ghero",
+                price: "#",
+                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
+                desc: "#",
+                stitch: "#",
+                color: "#",
+                category: "Ghero",
+                subcategory: null,
+                subsubcategory: null
+            }
+
+        ]
 
         let wishlist = [];
         let activeProduct = null;
         let historyStack = [];
 
-        // LOAD HOME PRODUCTS (Normal + Extra Product)
         function loadProducts() {
             productGrid.innerHTML = "";
             products.forEach(p => productGrid.innerHTML += cardHTML(p));
             syncHearts();
+        }
+
+        function updateProductCounts() {
+            // Reset all badges
+            document.querySelectorAll('.count-badge').forEach(badge => {
+                badge.innerText = '';
+                badge.classList.remove('show');
+            });
+            let counts = {};
+            products.forEach(p => {
+                // CATEGORY — only products without subcategory
+                if (!p.subcategory && !p.subsubcategory) {
+                    let key = `count-${p.category}`;
+                    counts[key] = (counts[key] || 0) + 1;
+                }
+                // SUBCATEGORY — only products without sub-subcategory
+                if (p.subcategory && !p.subsubcategory) {
+                    let key = `count-${p.category}-${p.subcategory}`;
+                    counts[key] = (counts[key] || 0) + 1;
+                }
+                // SUB-SUBCATEGORY — always direct
+                if (p.subsubcategory) {
+                    let key = `count-${p.category}-${p.subcategory}-${p.subsubcategory}`;
+                    counts[key] = (counts[key] || 0) + 1;
+                }
+            });
+            // Apply counts
+            Object.keys(counts).forEach(id => {
+                let badge = document.getElementById(id);
+                if (!badge) return;
+                let count = counts[id];
+                if (count > 0) {
+                    badge.innerText = count;
+                    badge.style.display = "inline-block";
+                    // animate
+                    requestAnimationFrame(() => {
+                        badge.classList.add('show');
+                    });
+                } else {
+                    badge.style.display = "none";
+                }
+            });
         }
 
         function cardHTML(p) {
@@ -367,7 +994,7 @@
 <div class="col-6 col-md-4 col-lg-3">
 <div class="card" data-id="${p.id}">
 <i class="bi bi-heart heart ${active}" onclick="toggleWishlist(${p.id})"></i>
-<img onclick="showProduct(${p.id})" src="${p.img}">
+<img onclick="showProduct(${p.id})" src="${p.img1 || p.img}">
 <div class="card-body">
 <h6>${p.name}</h6>
 <strong>₹${p.price}</strong>
@@ -376,9 +1003,13 @@
 </div>`;
         }
 
-        function openTab(id, el) {
+        function openTab(id, el = null, skipHistory = false) {
             let current = document.querySelector(".page.active")?.id;
-            if (current && current !== id) historyStack.push(current);
+
+            // push history ONLY when navigating forward
+            if (!skipHistory && current && current !== id) {
+                historyStack.push(current);
+            }
 
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(id).classList.add('active');
@@ -392,7 +1023,7 @@
             updateBackButton();
         }
 
-        // FEATURED PRODUCTS FROM REAL CATEGORY
+
         function renderFeaturedCategoryProducts() {
             let grid = document.getElementById('categoryFeaturedGrid');
             grid.innerHTML = "";
@@ -402,7 +1033,9 @@
         }
 
         function getProductPath(p) {
-            return p.category + (p.subCategory ? " > " + p.subCategory : "");
+            return p.category +
+                (p.subcategory ? " > " + p.subcategory : "") +
+                (p.subsubcategory ? " > " + p.subsubcategory : "");
         }
 
         function showProduct(id) {
@@ -411,7 +1044,18 @@
             modalPath.innerText = getProductPath(activeProduct);
             modalStitch.innerHTML = activeProduct.stitch ? "<strong>Stitch :</strong> " + activeProduct.stitch : "";
             modalColor.innerHTML = activeProduct.color ? "<strong>Color :</strong> " + activeProduct.color : "";
-            modalImg.src = activeProduct.img;
+            modalImg.src = activeProduct.img1 || activeProduct.img;
+
+            modalExtraImages.innerHTML = "";
+            Object.keys(activeProduct)
+                .filter(k => k.startsWith("img"))
+                .forEach((k, index) => {
+                    modalExtraImages.innerHTML += `
+      <img src="${activeProduct[k]}"
+           class="thumb-img ${index === 0 ? 'active' : ''}"
+           onclick="setMainImage('${activeProduct[k]}', this)">`;
+                });
+
             modalDesc.innerText = activeProduct.desc;
             modalPrice.innerText = "₹" + activeProduct.price;
             modalHeart.classList.toggle("active", wishlist.includes(activeProduct.id));
@@ -420,7 +1064,9 @@
         }
 
         function toggleWishlist(id) {
-            wishlist.includes(id) ? wishlist = wishlist.filter(x => x !== id) : wishlist.push(id);
+            wishlist.includes(id) ?
+                wishlist = wishlist.filter(x => x !== id) :
+                wishlist.push(id);
             syncHearts();
             renderWishlist();
         }
@@ -431,7 +1077,8 @@
                 let id = parseInt(c.dataset.id);
                 h.classList.toggle("active", wishlist.includes(id));
             });
-            if (activeProduct) modalHeart.classList.toggle("active", wishlist.includes(activeProduct.id));
+            if (activeProduct)
+                modalHeart.classList.toggle("active", wishlist.includes(activeProduct.id));
         }
 
         function renderWishlist() {
@@ -442,18 +1089,70 @@
             });
         }
 
-        function openPage(category, subCategory, pageId, gridId) {
-            openTab(pageId);
+        function setMainImage(src, el) {
+            modalImg.classList.add("fade");
+            setTimeout(() => {
+                modalImg.src = src;
+                modalImg.classList.remove("fade");
+            }, 150);
+
+            document.querySelectorAll("#modalExtraImages img").forEach(i => i.classList.remove("active"));
+            el.classList.add("active");
+        }
+
+        /* EXISTING CATEGORY + SUBCATEGORY FUNCTION */
+        function openPage(category, subcategory, pageId, gridId) {
+
+            openTab(pageId, null, false);
             let grid = document.getElementById(gridId);
             grid.innerHTML = "";
 
-            if (subCategory) {
-                products.filter(p => p.category === category && p.subCategory === subCategory)
+            // CASE-1 : OPENING CATEGORY ONLY (like 2020 page)
+            if (!subcategory) {
+
+                products
+                    .filter(p =>
+                        p.category === category &&
+                        (!p.subcategory || p.subcategory === "") &&
+                        (!p.subsubcategory || p.subsubcategory === ""))
                     .forEach(p => grid.innerHTML += cardHTML(p));
-            } else {
-                products.filter(p => p.category === category && (!p.subCategory || p.subCategory === ""))
-                    .forEach(p => grid.innerHTML += cardHTML(p));
+
+                syncHearts();
+                return;
             }
+
+            // CASE-2 : CHECK IF ANY PRODUCT HAS SUB-SUBCATEGORY
+            let hasSubSub = products.some(p =>
+                p.category === category &&
+                p.subcategory === subcategory &&
+                p.subsubcategory
+            );
+
+            // CASE-3 : SHOW PRODUCTS WITHOUT SUB-SUBCATEGORY IN SUBCATEGORY PAGE
+            products
+                .filter(p =>
+                    p.category === category &&
+                    p.subcategory === subcategory &&
+                    (!hasSubSub || !p.subsubcategory) // only those without subSub or if no subSub exists
+                )
+                .forEach(p => grid.innerHTML += cardHTML(p));
+
+            syncHearts();
+        }
+
+
+        /* 🔥 NEW FUNCTION — SUB-SUBCATEGORY */
+        function openSubSubPage(category, subcategory, subsubcategory, pageId, gridId) {
+            openTab(pageId, null, false);
+            let grid = document.getElementById(gridId);
+            grid.innerHTML = "";
+
+            products
+                .filter(p =>
+                    p.category === category &&
+                    p.subcategory === subcategory &&
+                    p.subsubcategory === subsubcategory)
+                .forEach(p => grid.innerHTML += cardHTML(p));
 
             syncHearts();
         }
@@ -473,12 +1172,12 @@
 
         function goBack() {
             if (historyStack.length === 0) {
-                openTab('home');
+                openTab('home', null, true);
                 return;
             }
             let lastPage = historyStack.pop();
             if (lastPage === 'category') historyStack = [];
-            openTab(lastPage);
+            openTab(lastPage, null, true);
         }
     </script>
 
