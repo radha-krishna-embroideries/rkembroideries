@@ -814,12 +814,6 @@
     let activeProduct = null;
     let historyStack = [];
 
-    function loadProducts() {
-    productGrid.innerHTML = "";
-    products.forEach(p => productGrid.innerHTML += cardHTML(p));
-    syncHearts();
-    }
-
     function updateProductCounts() {
     // Reset all badges
     document.querySelectorAll('.count-badge').forEach(badge => {
