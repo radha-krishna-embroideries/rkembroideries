@@ -203,7 +203,8 @@
 
         <nav class="navbar navbar-dark fixed-top">
             <div class="container-fluid">
-                <span class="navbar-brand fw-bold">My Store</span>
+                <span class="navbar-brand fw-bold">RK Embroideries</span>
+                <button class="btn btn-danger btn-sm" onclick="logout()">Logout</button>
             </div>
         </nav>
 
@@ -736,449 +737,351 @@
             if (e.key === "Enter") checkLogin();
         });
 
+        function logout() {
+            // Hide main content
+            mainContent.style.display = "none";
+
+            // Show login overlay again
+            loginOverlay.classList.remove("hide");
+
+            // Clear password input and error
+            password.value = "";
+            errorMessage.innerText = "";
+
+            // Scroll to top and reset page state
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+
+            // Reset active page to Home
+            document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+            document.getElementById("home").classList.add("active");
+
+            // Reset bottom nav active tab
+            document.querySelectorAll(".bottomnav div").forEach(d => d.classList.remove("active-tab"));
+            document.querySelector(".bottomnav div:first-child").classList.add("active-tab");
+        }
+
+
         /* PRODUCT ARRAY */
-        let products = [{
-                id: 1,
-                name: "2020",
-                price: "#",
-                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                desc: "#",
-                stitch: "#",
-                color: "#",
-                category: "2020",
-                subcategory: null,
-                subsubcategory: null
-            },
-            {
-                id: 2,
-                name: "2020 / Allover",
-                price: "#",
-                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                desc: "#",
-                stitch: "#",
-                color: "#",
-                category: "2020",
-                subcategory: "Allover",
-                subsubcategory: null
-            },
-            {
-                id: 3,
-                name: "2021",
-                price: "#",
-                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                desc: "#",
-                stitch: "#",
-                color: "#",
-                category: "2021",
-                subcategory: null,
-                subsubcategory: null
-            },
-            {
-                id: 4,
-                name: "2021 / Koti",
-                price: "#",
-                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                desc: "#",
-                stitch: "#",
-                color: "#",
-                category: "2021",
-                subcategory: "Koti",
-                subsubcategory: null
-            },
-            {
-                id: 5,
-                name: "2021 / Panal",
-                price: "#",
-                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                desc: "#",
-                stitch: "#",
-                color: "#",
-                category: "2021",
-                subcategory: "Panal",
-                subsubcategory: null
-            },
-            {
-                id: 6,
-                name: "2022",
-                price: "#",
-                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                desc: "#",
-                stitch: "#",
-                color: "#",
-                category: "2022",
-                subcategory: null,
-                subsubcategory: null
-            },
-            {
-                id: 7,
-                name: "2023",
-                price: "#",
-                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                desc: "#",
-                stitch: "#",
-                color: "#",
-                category: "2023",
-                subcategory: null,
-                subsubcategory: null
-            },
-            {
-                id: 8,
-                name: "2023 / Hitesh Simran",
-                price: "#",
-                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                desc: "#",
-                stitch: "#",
-                color: "#",
-                category: "2023",
-                subcategory: "Hitesh Simran",
-                subsubcategory: null
-            },
-            {
-                id: 9,
-                name: "Bhaveshbhai",
-                price: "#",
-                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                desc: "#",
-                stitch: "#",
-                color: "#",
-                category: "Bhaveshbhai",
-                subcategory: null,
-                subsubcategory: null
-            },
-            {
-                id: 10,
-                name: "Bhaveshbhai / Bhavin",
-                price: "#",
-                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                desc: "#",
-                stitch: "#",
-                color: "#",
-                category: "Bhaveshbhai",
-                subcategory: "Bhavin",
-                subsubcategory: null
-            },
-            {
-                id: 11,
-                name: "Dhiraj",
-                price: "#",
-                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                desc: "#",
-                stitch: "#",
-                color: "#",
-                category: "Dhiraj",
-                subcategory: null,
-                subsubcategory: null
-            },
-            {
-                id: 12,
-                name: "Emb",
-                price: "#",
-                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                desc: "#",
-                stitch: "#",
-                color: "#",
-                category: "Emb",
-                subcategory: null,
-                subsubcategory: null
-            },
-            {
-                id: 13,
-                name: "Gaurang",
-                price: "#",
-                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                desc: "#",
-                stitch: "#",
-                color: "#",
-                category: "Gaurang",
-                subcategory: null,
-                subsubcategory: null
-            },
-            {
-                id: 14,
-                name: "Ghero",
-                price: "#",
-                img1: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img2: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                img3: "https://drive.google.com/thumbnail?id=15ls6f3KdYJg3WoqVz04-4CIDINirzpwj&sz=w1000",
-                desc: "#",
-                stitch: "#",
-                color: "#",
-                category: "Ghero",
-                subcategory: null,
-                subsubcategory: null
-            }
+     
+            let products = [];
 
-        ]
+        const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQqEdtRiGUvHaiMdijWMOVW5OW4dZ6R3yhWADWcJ90zydizctYtz5KL1n1SSUotROqwUT_sVMOD90Cq/pub?gid=0&single=true&output=csv";
 
-        let wishlist = [];
-        let activeProduct = null;
-        let historyStack = [];
+        async function loadProductsFromSheet() {
+            const res = await fetch(SHEET_URL);
+            const text = await res.text();
 
-        function loadProducts() {
-            productGrid.innerHTML = "";
-            products.forEach(p => productGrid.innerHTML += cardHTML(p));
-            syncHearts();
-        }
+            const rows = text.split("\n").map(r => r.split(","));
+            const headers = rows.shift().map(h => h.trim());
 
-        function updateProductCounts() {
-            // Reset all badges
-            document.querySelectorAll('.count-badge').forEach(badge => {
-                badge.innerText = '';
-                badge.classList.remove('show');
-            });
-            let counts = {};
-            products.forEach(p => {
-                // CATEGORY — only products without subcategory
-                if (!p.subcategory && !p.subsubcategory) {
-                    let key = `count-${p.category}`;
-                    counts[key] = (counts[key] || 0) + 1;
-                }
-                // SUBCATEGORY — only products without sub-subcategory
-                if (p.subcategory && !p.subsubcategory) {
-                    let key = `count-${p.category}-${p.subcategory}`;
-                    counts[key] = (counts[key] || 0) + 1;
-                }
-                // SUB-SUBCATEGORY — always direct
-                if (p.subsubcategory) {
-                    let key = `count-${p.category}-${p.subcategory}-${p.subsubcategory}`;
-                    counts[key] = (counts[key] || 0) + 1;
-                }
-            });
-            // Apply counts
-            Object.keys(counts).forEach(id => {
-                let badge = document.getElementById(id);
-                if (!badge) return;
-                let count = counts[id];
-                if (count > 0) {
-                    badge.innerText = count;
-                    badge.style.display = "inline-block";
-                    // animate
-                    requestAnimationFrame(() => {
-                        badge.classList.add('show');
-                    });
-                } else {
-                    badge.style.display = "none";
-                }
-            });
-        }
-
-        function cardHTML(p) {
-            let active = wishlist.includes(p.id) ? "active" : "";
-            return `
-<div class="col-6 col-md-4 col-lg-3">
-<div class="card" data-id="${p.id}">
-<i class="bi bi-heart heart ${active}" onclick="toggleWishlist(${p.id})"></i>
-<img onclick="showProduct(${p.id})" src="${p.img1 || p.img}">
-<div class="card-body">
-<h6>${p.name}</h6>
-<strong>₹${p.price}</strong>
-</div>
-</div>
-</div>`;
-        }
-
-        function openTab(id, el = null, skipHistory = false) {
-            let current = document.querySelector(".page.active")?.id;
-
-            // push history ONLY when navigating forward
-            if (!skipHistory && current && current !== id) {
-                historyStack.push(current);
-            }
-
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-
-            document.querySelectorAll('.bottomnav div').forEach(b => b.classList.remove('active-tab'));
-            if (el) el.classList.add('active-tab');
-
-            if (id === "wishlist") renderWishlist();
-            if (id === "category") renderFeaturedCategoryProducts();
-
-            updateBackButton();
-        }
-
-
-        function renderFeaturedCategoryProducts() {
-            let grid = document.getElementById('categoryFeaturedGrid');
-            grid.innerHTML = "";
-            products
-                .filter(p => p.category === "Extra Product")
-                .forEach(p => grid.innerHTML += cardHTML(p));
-        }
-
-        function getProductPath(p) {
-            return p.category +
-                (p.subcategory ? " > " + p.subcategory : "") +
-                (p.subsubcategory ? " > " + p.subsubcategory : "");
-        }
-
-        function showProduct(id) {
-            activeProduct = products.find(p => p.id === id);
-            modalTitle.innerText = activeProduct.name;
-            modalPath.innerText = getProductPath(activeProduct);
-            modalStitch.innerHTML = activeProduct.stitch ? "<strong>Stitch :</strong> " + activeProduct.stitch : "";
-            modalColor.innerHTML = activeProduct.color ? "<strong>Color :</strong> " + activeProduct.color : "";
-            modalImg.src = activeProduct.img1 || activeProduct.img;
-
-            modalExtraImages.innerHTML = "";
-            Object.keys(activeProduct)
-                .filter(k => k.startsWith("img"))
-                .forEach((k, index) => {
-                    modalExtraImages.innerHTML += `
-      <img src="${activeProduct[k]}"
-           class="thumb-img ${index === 0 ? 'active' : ''}"
-           onclick="setMainImage('${activeProduct[k]}', this)">`;
+            products = rows.map((row, i) => {
+                let obj = {};
+                headers.forEach((h, idx) => {
+                    obj[h] = row[idx]?.trim() || null;
                 });
 
-            modalDesc.innerText = activeProduct.desc;
-            modalPrice.innerText = "₹" + activeProduct.price;
-            modalHeart.classList.toggle("active", wishlist.includes(activeProduct.id));
-            modalHeart.onclick = () => toggleWishlist(activeProduct.id);
-            new bootstrap.Modal(productModal).show();
-        }
-
-        function toggleWishlist(id) {
-            wishlist.includes(id) ?
-                wishlist = wishlist.filter(x => x !== id) :
-                wishlist.push(id);
-            syncHearts();
-            renderWishlist();
-        }
-
-        function syncHearts() {
-            document.querySelectorAll(".card").forEach(c => {
-                let h = c.querySelector(".heart");
-                let id = parseInt(c.dataset.id);
-                h.classList.toggle("active", wishlist.includes(id));
+                return {
+                    id: Number(obj.id || i + 1),
+                    name: obj.name,
+                    price: obj.price,
+                    img1: obj.img1,
+                    img2: obj.img2,
+                    img3: obj.img3,
+                    desc: obj.desc,
+                    stitch: obj.stitch,
+                    color: obj.color,
+                    category: obj.category,
+                    subcategory: obj.subcategory || null,
+                    subsubcategory: obj.subsubcategory || null
+                };
             });
-            if (activeProduct)
-                modalHeart.classList.toggle("active", wishlist.includes(activeProduct.id));
+
+            loadProductsFromSheet();
+            updateProductCounts();
         }
+  
 
-        function renderWishlist() {
-            wishlistGrid.innerHTML = "";
-            wishlist.forEach(id => {
-                let p = products.find(x => x.id === id);
-                wishlistGrid.innerHTML += cardHTML(p);
-            });
-        }
+    let wishlist = [];
+    let activeProduct = null;
+    let historyStack = [];
 
-        function setMainImage(src, el) {
-            modalImg.classList.add("fade");
-            setTimeout(() => {
-                modalImg.src = src;
-                modalImg.classList.remove("fade");
-            }, 150);
+    function loadProducts() {
+    productGrid.innerHTML = "";
+    products.forEach(p => productGrid.innerHTML += cardHTML(p));
+    syncHearts();
+    }
 
-            document.querySelectorAll("#modalExtraImages img").forEach(i => i.classList.remove("active"));
-            el.classList.add("active");
-        }
+    function updateProductCounts() {
+    // Reset all badges
+    document.querySelectorAll('.count-badge').forEach(badge => {
+    badge.innerText = '';
+    badge.classList.remove('show');
+    });
+    let counts = {};
+    products.forEach(p => {
+    // CATEGORY — only products without subcategory
+    if (!p.subcategory && !p.subsubcategory) {
+    let key = `count-${p.category}`;
+    counts[key] = (counts[key] || 0) + 1;
+    }
+    // SUBCATEGORY — only products without sub-subcategory
+    if (p.subcategory && !p.subsubcategory) {
+    let key = `count-${p.category}-${p.subcategory}`;
+    counts[key] = (counts[key] || 0) + 1;
+    }
+    // SUB-SUBCATEGORY — always direct
+    if (p.subsubcategory) {
+    let key = `count-${p.category}-${p.subcategory}-${p.subsubcategory}`;
+    counts[key] = (counts[key] || 0) + 1;
+    }
+    });
+    // Apply counts
+    Object.keys(counts).forEach(id => {
+    let badge = document.getElementById(id);
+    if (!badge) return;
+    let count = counts[id];
+    if (count > 0) {
+    badge.innerText = count;
+    badge.style.display = "inline-block";
+    // animate
+    requestAnimationFrame(() => {
+    badge.classList.add('show');
+    });
+    } else {
+    badge.style.display = "none";
+    }
+    });
+    }
 
-        /* EXISTING CATEGORY + SUBCATEGORY FUNCTION */
-        function openPage(category, subcategory, pageId, gridId) {
+    function cardHTML(p) {
+    let active = wishlist.includes(p.id) ? "active" : "";
+    return `
+    <div class="col-6 col-md-4 col-lg-3">
+        <div class="card" data-id="${p.id}">
+            <i class="bi bi-heart heart ${active}" onclick="toggleWishlist(${p.id})"></i>
+            <img onclick="showProduct(${p.id})" src="${p.img1 || p.img}">
+            <div class="card-body">
+                <h6>${p.name}</h6>
+                <strong>₹${p.price}</strong>
+            </div>
+        </div>
+    </div>`;
+    }
 
-            openTab(pageId, null, false);
-            let grid = document.getElementById(gridId);
-            grid.innerHTML = "";
+    function openTab(id, el = null, skipHistory = false) {
+    let current = document.querySelector(".page.active")?.id;
 
-            // CASE-1 : OPENING CATEGORY ONLY (like 2020 page)
-            if (!subcategory) {
+    // push history ONLY when navigating forward
+    if (!skipHistory && current && current !== id) {
+    historyStack.push(current);
+    }
 
-                products
-                    .filter(p =>
-                        p.category === category &&
-                        (!p.subcategory || p.subcategory === "") &&
-                        (!p.subsubcategory || p.subsubcategory === ""))
-                    .forEach(p => grid.innerHTML += cardHTML(p));
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
 
-                syncHearts();
-                return;
-            }
+    document.querySelectorAll('.bottomnav div').forEach(b => b.classList.remove('active-tab'));
+    if (el) el.classList.add('active-tab');
 
-            // CASE-2 : CHECK IF ANY PRODUCT HAS SUB-SUBCATEGORY
-            let hasSubSub = products.some(p =>
-                p.category === category &&
-                p.subcategory === subcategory &&
-                p.subsubcategory
-            );
+    if (id === "wishlist") renderWishlist();
+    if (id === "category") renderFeaturedCategoryProducts();
 
-            // CASE-3 : SHOW PRODUCTS WITHOUT SUB-SUBCATEGORY IN SUBCATEGORY PAGE
-            products
-                .filter(p =>
-                    p.category === category &&
-                    p.subcategory === subcategory &&
-                    (!hasSubSub || !p.subsubcategory) // only those without subSub or if no subSub exists
-                )
-                .forEach(p => grid.innerHTML += cardHTML(p));
+    updateBottomNavActive(id);
+    updateBackButton();
+    window.scrollTo(0, 0);
+    }
 
-            syncHearts();
-        }
+    function updateBottomNavActive(pageId) {
+    document.querySelectorAll('.bottomnav div').forEach(b => b.classList.remove('active-tab'));
+
+    if (pageId === "home") {
+    document.querySelector('.bottomnav div:nth-child(1)').classList.add('active-tab');
+    } else if (pageId === "category") {
+    document.querySelector('.bottomnav div:nth-child(2)').classList.add('active-tab');
+    } else if (pageId === "wishlist") {
+    document.querySelector('.bottomnav div:nth-child(3)').classList.add('active-tab');
+    } else if (pageId === "account") {
+    document.querySelector('.bottomnav div:nth-child(4)').classList.add('active-tab');
+    }
+    }
 
 
-        /* 🔥 NEW FUNCTION — SUB-SUBCATEGORY */
-        function openSubSubPage(category, subcategory, subsubcategory, pageId, gridId) {
-            openTab(pageId, null, false);
-            let grid = document.getElementById(gridId);
-            grid.innerHTML = "";
 
-            products
-                .filter(p =>
-                    p.category === category &&
-                    p.subcategory === subcategory &&
-                    p.subsubcategory === subsubcategory)
-                .forEach(p => grid.innerHTML += cardHTML(p));
+    function renderFeaturedCategoryProducts() {
+    let grid = document.getElementById('categoryFeaturedGrid');
+    grid.innerHTML = "";
+    products
+    .filter(p => p.category === "Extra Product")
+    .forEach(p => grid.innerHTML += cardHTML(p));
+    }
 
-            syncHearts();
-        }
+    function getProductPath(p) {
+    return p.category +
+    (p.subcategory ? " > " + p.subcategory : "") +
+    (p.subsubcategory ? " > " + p.subsubcategory : "");
+    }
 
-        function searchProducts() {
-            let query = searchInput.value.toLowerCase();
-            document.querySelectorAll(".page.active .card").forEach(card => {
-                let name = card.querySelector("h6").innerText.toLowerCase();
-                card.style.display = name.includes(query) ? "" : "none";
-            });
-        }
+    function showProduct(id) {
+    activeProduct = products.find(p => p.id === id);
+    modalTitle.innerText = activeProduct.name;
+    modalPath.innerText = getProductPath(activeProduct);
+    modalStitch.innerHTML = activeProduct.stitch ? "<strong>Stitch :</strong> " + activeProduct.stitch : "";
+    modalColor.innerHTML = activeProduct.color ? "<strong>Color :</strong> " + activeProduct.color : "";
+    modalImg.src = activeProduct.img1 || activeProduct.img;
 
-        function updateBackButton() {
-            let currentPage = document.querySelector(".page.active")?.id;
-            backBtn.style.display = currentPage !== "home" ? "inline-block" : "none";
-        }
+    modalExtraImages.innerHTML = "";
+    Object.keys(activeProduct)
+    .filter(k => k.startsWith("img"))
+    .forEach((k, index) => {
+    modalExtraImages.innerHTML += `
+    <img src="${activeProduct[k]}" class="thumb-img ${index === 0 ? 'active' : ''}" onclick="setMainImage('${activeProduct[k]}', this)">`;
+    });
 
-        function goBack() {
-            if (historyStack.length === 0) {
-                openTab('home', null, true);
-                return;
-            }
-            let lastPage = historyStack.pop();
-            if (lastPage === 'category') historyStack = [];
-            openTab(lastPage, null, true);
-        }
+    modalDesc.innerText = activeProduct.desc;
+    modalPrice.innerText = "₹" + activeProduct.price;
+    modalHeart.classList.toggle("active", wishlist.includes(activeProduct.id));
+    modalHeart.onclick = () => toggleWishlist(activeProduct.id);
+    new bootstrap.Modal(productModal).show();
+    }
+
+    function toggleWishlist(id) {
+    wishlist.includes(id) ?
+    wishlist = wishlist.filter(x => x !== id) :
+    wishlist.push(id);
+    syncHearts();
+    renderWishlist();
+    }
+
+    function syncHearts() {
+    document.querySelectorAll(".card").forEach(c => {
+    let h = c.querySelector(".heart");
+    let id = parseInt(c.dataset.id);
+    h.classList.toggle("active", wishlist.includes(id));
+    });
+    if (activeProduct)
+    modalHeart.classList.toggle("active", wishlist.includes(activeProduct.id));
+    }
+
+    function renderWishlist() {
+    wishlistGrid.innerHTML = "";
+    wishlist.forEach(id => {
+    let p = products.find(x => x.id === id);
+    wishlistGrid.innerHTML += cardHTML(p);
+    });
+    }
+
+    function setMainImage(src, el) {
+    modalImg.classList.add("fade");
+    setTimeout(() => {
+    modalImg.src = src;
+    modalImg.classList.remove("fade");
+    }, 150);
+
+    document.querySelectorAll("#modalExtraImages img").forEach(i => i.classList.remove("active"));
+    el.classList.add("active");
+    }
+
+    /* EXISTING CATEGORY + SUBCATEGORY FUNCTION */
+    function openPage(category, subcategory, pageId, gridId) {
+
+    openTab(pageId, null, false);
+    let grid = document.getElementById(gridId);
+    grid.innerHTML = "";
+
+    // CASE-1 : OPENING CATEGORY ONLY (like 2020 page)
+    if (!subcategory) {
+
+    products
+    .filter(p =>
+    p.category === category &&
+    (!p.subcategory || p.subcategory === "") &&
+    (!p.subsubcategory || p.subsubcategory === ""))
+    .forEach(p => grid.innerHTML += cardHTML(p));
+
+    syncHearts();
+    return;
+    }
+
+    // CASE-2 : CHECK IF ANY PRODUCT HAS SUB-SUBCATEGORY
+    let hasSubSub = products.some(p =>
+    p.category === category &&
+    p.subcategory === subcategory &&
+    p.subsubcategory
+    );
+
+    // CASE-3 : SHOW PRODUCTS WITHOUT SUB-SUBCATEGORY IN SUBCATEGORY PAGE
+    products
+    .filter(p =>
+    p.category === category &&
+    p.subcategory === subcategory &&
+    (!hasSubSub || !p.subsubcategory) // only those without subSub or if no subSub exists
+    )
+    .forEach(p => grid.innerHTML += cardHTML(p));
+
+    syncHearts();
+    }
+
+
+    /* 🔥 NEW FUNCTION — SUB-SUBCATEGORY */
+    function openSubSubPage(category, subcategory, subsubcategory, pageId, gridId) {
+    openTab(pageId, null, false);
+    let grid = document.getElementById(gridId);
+    grid.innerHTML = "";
+
+    products
+    .filter(p =>
+    p.category === category &&
+    p.subcategory === subcategory &&
+    p.subsubcategory === subsubcategory)
+    .forEach(p => grid.innerHTML += cardHTML(p));
+
+    syncHearts();
+    }
+
+    function searchProducts() {
+    let query = searchInput.value.toLowerCase();
+    document.querySelectorAll(".page.active .card").forEach(card => {
+    let name = card.querySelector("h6").innerText.toLowerCase();
+    card.style.display = name.includes(query) ? "" : "none";
+    });
+    }
+
+    function updateBackButton() {
+    let currentPage = document.querySelector(".page.active")?.id;
+    backBtn.style.display = currentPage !== "home" ? "inline-block" : "none";
+    }
+
+    function goBack() {
+    if (historyStack.length === 0) {
+    openTab('home', null, true);
+    return;
+    }
+    let lastPage = historyStack.pop();
+    if (lastPage === 'category') historyStack = [];
+    openTab(lastPage, null, true);
+    }
+
+    /* AUTO LOGOUT AFTER INACTIVITY */
+    let inactivityTime = function() {
+    let timer;
+    const maxInactivity = 1 * 60 * 1000; // 1 minute
+    function resetTimer() {
+    clearTimeout(timer);
+    // Only count inactivity if logged in
+    if (!loginOverlay.classList.contains("hide")) return;
+    timer = setTimeout(() => {
+    logout(); // auto logout silently
+    }, maxInactivity);
+    }
+    // Reset timer on user activity
+    ["mousemove", "keydown", "scroll", "touchstart", "click"].forEach(evt =>
+    document.addEventListener(evt, resetTimer)
+    );
+    resetTimer(); // start timer initially
+    };
+    // Initialize auto-logout
+    inactivityTime();
+
     </script>
 
 </body>
