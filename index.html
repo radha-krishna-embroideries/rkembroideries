@@ -763,44 +763,55 @@
 
 
         /* PRODUCT ARRAY */
-     
+        <
+        script >
             let products = [];
 
-        const SHEET_URL = "https://docs.google.com/spreadsheets/d/1BrZiw-2ATrB9WuK_eKnBzmve2gBPUJshIM4C0b5LiBo/edit?gid=0#gid=0";
+        // 👇 ONLY CHANGE THIS
+        const SHEET_ID = "1BrZiw-2ATrB9WuK_eKnBzmve2gBPUJshIM4C0b5LiBo";
+        const SHEET_NAME = "products"; // change if your sheet name is different
 
-        async function loadProductsFromSheet() {
-            const res = await fetch(SHEET_URL);
-            const text = await res.text();
+        const SHEET_URL =
+            `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${SHEET_NAME}`;
 
-            const rows = text.split("\n").map(r => r.split(","));
-            const headers = rows.shift().map(h => h.trim());
+        async function loadProducts() {
+            try {
+                const res = await fetch(SHEET_URL);
+                const csv = await res.text();
 
-            products = rows.map((row, i) => {
-                let obj = {};
-                headers.forEach((h, idx) => {
-                    obj[h] = row[idx]?.trim() || null;
+                const rows = csv.split("\n").map(r =>
+                    r.split(",").map(c => c.replace(/^"|"$/g, "").trim())
+                );
+
+                const headers = rows.shift();
+
+                products = rows.map(r => {
+                    let obj = {};
+                    headers.forEach((h, i) => {
+                        obj[h] = r[i] || null;
+                    });
+
+                    obj.id = Number(obj.id);
+                    obj.price = obj.price || "#";
+                    return obj;
                 });
 
-                return {
-                    id: Number(obj.id || i + 1),
-                    name: obj.name,
-                    price: obj.price,
-                    img1: obj.img1,
-                    img2: obj.img2,
-                    img3: obj.img3,
-                    desc: obj.desc,
-                    stitch: obj.stitch,
-                    color: obj.color,
-                    category: obj.category,
-                    subcategory: obj.subcategory || null,
-                    subsubcategory: obj.subsubcategory || null
-                };
-            });
+                renderAll();
 
-            loadProductsFromSheet();
-            updateProductCounts();
+            } catch (err) {
+                console.error("Google Sheet Error:", err);
+                alert("Failed to load products");
+            }
         }
-  
+
+        function renderAll() {
+            productGrid.innerHTML = "";
+            products.forEach(p => productGrid.innerHTML += cardHTML(p));
+            updateProductCounts();
+            syncHearts();
+        }
+    </script>
+
 
     let wishlist = [];
     let activeProduct = null;
